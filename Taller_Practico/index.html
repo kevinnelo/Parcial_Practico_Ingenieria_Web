@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="system">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mini BI (CSV → Tabla + Barras)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <h1>Mini BI</h1>
+    <button id="themeBtn" class="btn" aria-pressed="false" aria-label="Cambiar tema">🌓</button>
+  </header>
+
+  <main class="grid">
+    <!-- 1) CSV -->
+    <section class="panel">
+      <h2>1) Ingresar CSV</h2>
+      <label for="csvText">Pega CSV (primera fila = encabezados)</label>
+      <textarea id="csvText" rows="7" placeholder="Producto,Mes,Ventas
+A,Jan,120
+A,Feb,90
+B,Jan,200"></textarea>
+
+      <div class="row">
+        <label class="sr-only" for="csvFile">Archivo CSV</label>
+        <input id="csvFile" type="file" accept=".csv,text/csv" />
+        <button id="parseBtn" class="btn">Procesar</button>
+        <button id="sampleBtn" class="btn ghost">Ejemplo</button>
+      </div>
+
+      <div id="alerts" class="alerts" aria-live="polite"></div>
+    </section>
+
+    <!-- 2) Tabla -->
+    <section class="panel">
+      <h2>2) Tabla</h2>
+      <div class="table-wrap" tabindex="0" aria-label="Tabla CSV">
+        <table id="tbl">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3) Gráfica -->
+    <section class="panel wide">
+      <h2>3) Gráfica de barras</h2>
+      <div class="row">
+        <label for="xSel">X:</label>
+        <select id="xSel"></select>
+        <label for="ySel">Y:</label>
+        <select id="ySel"></select>
+        <label for="aggSel">Agregación:</label>
+        <select id="aggSel">
+          <option value="sum">SUM</option>
+          <option value="avg">AVG</option>
+          <option value="count">COUNT</option>
+        </select>
+        <button id="drawBtn" class="btn">Dibujar</button>
+      </div>
+
+      <div class="chart">
+        <canvas id="chart" width="900" height="420" role="img" aria-label="Gráfica de barras"></canvas>
+      </div>
+
+      <p id="chartAlt" class="muted" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="foot">
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
